@@ -3,16 +3,11 @@ import { useState } from 'react';
 import './App.scss';
 import GetWeatherIcon from "./utils/GetWeatherIcon";
 import { getCurrentDate } from "./utils/misc";
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 
 function App() {
   const [isCelsius, setIsCelsius] = useState<boolean>(true);
-  const handleF = () => {
-    setIsCelsius(false);
-  }
-
-  const handleC = () => {
-    setIsCelsius(true);
-  }
+  const [humidity, setHumidity] = useState<number>(30);
 
   return (
     <div className="App">
@@ -36,13 +31,13 @@ function App() {
         <header>
           <div
             className={`TempIcon${!isCelsius ? " active" : " "}`}
-            onClick={handleF}
+            onClick={() => { setIsCelsius(false); }}
           >
             °F
           </div>
           <div
             className={`TempIcon${isCelsius ? " active" : " "}`}
-            onClick={handleC}
+            onClick={() => { setIsCelsius(true); }}
           >
             °C
           </div>
@@ -69,18 +64,37 @@ function App() {
         </div>
         <div className="TodayHighlight">
           <div className="Bigcard">
-            <span>1</span>
+            <span>Wind Status</span>
+            <h2>1.62<span>mph</span></h2>
+            <span>South</span>
           </div>
           <div className="Bigcard">
-            <span>2</span>
+            <span>Humidity</span>
+            <h2>{humidity}<span>%</span></h2>
+            <progress
+              value={humidity}
+              max="100"
+            ></progress>
           </div>
-          <div className="Bigcard">
-            <span>3</span>
+          <div className="Bigcard TwoElement">
+            <span>Visibility</span>
+            <h2>6.22<span>miles</span></h2>
           </div>
-          <div className="Bigcard">
-            <span>4</span>
+          <div className="Bigcard TwoElement">
+            <span>Air Pressure</span>
+            <h2>1010<span>hPa</span></h2>
           </div>
         </div>
+        <footer>
+          <a
+            href="https://github.com/jennyjunho2/weatherapp"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Repo Link"
+          >
+            <FaGithub className="GithubIcon" size="36" />
+          </a>
+        </footer>
       </div>
     </div >
   );
