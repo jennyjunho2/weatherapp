@@ -1,0 +1,157 @@
+@use "sass:color";
+@import "./reset.css";
+
+$primary-background-color: #011627;
+$secondary-background-color: #0b2942;
+$white: #d6deeb;
+$gray: #293131;
+$transition-effect: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-color: $primary-background-color;
+  color: white;
+  font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SidebarContainer {
+  width: 30%;
+  height: 100%;
+  background-color: $secondary-background-color;
+
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #122d42;
+}
+
+.MainPage {
+  width: 70%;
+  height: 100%;
+  background-color: inherit;
+  padding-left: 150px;
+  padding-right: 150px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  header {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 30px;
+    padding-top: 40px;
+  }
+
+  span {
+    font-size: 35px;
+    padding: 30px 0;
+  }
+}
+
+// Farenheit, Celcius round icons
+$radius-size: 30px;
+
+.TempIcon {
+  width: $radius-size;
+  height: $radius-size;
+
+  font-size: 24px;
+  font-weight: 600;
+
+  background-color: $gray;
+
+  border-radius: 50%;
+  border: 1px solid white;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  filter: brightness(0.3);
+  transition: all 0.4s $transition-effect;
+}
+
+.active {
+  filter: brightness(1);
+  color: $gray;
+  background-color: $white;
+}
+
+/////
+.WeekWeather {
+  width: 100%;
+  padding-top: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.Card {
+  width: 280px;
+  padding: 5px 0px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: color.scale($primary-background-color, $lightness: 5%);
+  border-radius: 5%;
+
+  .TemperatureSpan {
+    color: $white;
+    font-size: 24px;
+  }
+
+  .DateSpan {
+    color: $white;
+    font-size: 32px;
+  }
+}
+
+.Icons {
+  color: $white;
+  font-size: 60px;
+}
+
+.MiddleSpan {
+  padding: 20px 0;
+  font-weight: 700;
+}
+
+.TodayHighlight {
+  display: grid;
+  gap: 20px;
+
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.Bigcard {
+  width: 450px;
+  background-color: color.scale($primary-background-color, $lightness: 5%);
+
+  padding: 5px 0px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: color.scale($primary-background-color, $lightness: 5%);
+  border-radius: 5%;
+  span {
+    font-size: 20px;
+  }
+}
