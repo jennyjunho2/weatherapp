@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="SidebarContainer">
+      <aside className="SidebarContainer">
 
         <button className="Search">
           <MdSearch />
@@ -26,7 +26,7 @@ function App() {
         <div className="location">
           <h1>Location</h1>
         </div>
-      </div>
+      </aside>
       <div className="MainPage">
         <header>
           <div
