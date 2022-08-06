@@ -6,18 +6,59 @@ $secondary-background-color: #0b2942;
 $white: #d6deeb;
 $gray: #293131;
 $transition-effect: cubic-bezier(0.075, 0.82, 0.165, 1);
+@mixin PosAbsoluteCenter($tp) {
+  position: absolute;
+  margin-left: 0;
+  margin-right: 0;
+  left: 0;
+  right: 0;
+  top: $tp;
+}
 
 body {
-  font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: $primary-background-color;
+  transition: all 0.3s ease-in-out;
+}
+
+div {
+  display: block;
 }
 
 .App {
   display: grid;
   grid-template-columns: 450px 1fr;
+  filter: brightness(1);
+  transition: all 0.2s ease-in-out;
+  @media only screen and (max-width: 800px) {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+.MainContainer {
+  filter: brightness(1);
+  transition: filter 0.3s ease-in-out;
+}
+
+// SideBar
+
+$search-icon-size: 30px;
+
+.SearchIcon {
+  font-size: $search-icon-size;
+}
+
+.LocationIcon {
+  font-size: 50px;
+  cursor: pointer;
 }
 
 .SidebarContainer {
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-flow: column nowrap;
   flex-direction: column;
@@ -31,11 +72,114 @@ body {
 
   background-color: $secondary-background-color;
   color: $white;
+
+  .SearchContainer {
+    width: 100%;
+    @include PosAbsoluteCenter(3vh);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .SearchBox {
+      position: relative;
+      width: fit-content;
+      height: fit-content;
+    }
+
+    button {
+      width: fit-content;
+      color: $white;
+      background-color: inherit;
+      padding: 3px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: $search-icon-size;
+
+      border: 3.5px solid $white;
+      border-radius: 50%;
+
+      cursor: pointer;
+    }
+  }
+
+  .LocationCity {
+    @include PosAbsoluteCenter(15vh);
+    font-size: 60px;
+    font-weight: 600;
+  }
+
+  .DescContainer {
+    @include PosAbsoluteCenter(25vh);
+    font-size: 38px;
+    font-weight: 600;
+    color: color.scale($gray, $lightness: 30%);
+  }
+
+  .SkyconContainer {
+    @include PosAbsoluteCenter(35vh);
+    padding-bottom: 100px;
+  }
+
+  .TemperatureContainer {
+    @include PosAbsoluteCenter(68vh);
+    overflow: hidden;
+    font-weight: bold;
+
+    $tf: transform 0.2s ease-in-out;
+    $op: opacity 0.2s ease-in-out;
+    h2 {
+      opacity: 1;
+      font-size: 48px;
+      transition: $tf, $op;
+      transform: translateY(0);
+    }
+
+    h3 {
+      opacity: 0;
+      font-size: 36px;
+      transition: $tf, $op;
+      transform: translateY(0);
+    }
+
+    &:hover {
+      h2 {
+        opacity: 0;
+        transition: $tf, $op;
+        transform: translateY(-40px);
+      }
+
+      h3 {
+        opacity: 1;
+        transition: $tf, $op;
+        transform: translateY(-40px);
+      }
+    }
+  }
+
+  .TempMinMaxContainer {
+    @include PosAbsoluteCenter(76vh);
+    display: flex;
+    font-size: 24px;
+    font-weight: bolder;
+    color: color.scale($gray, $lightness: 60%);
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .Date {
+    @include PosAbsoluteCenter(87.5vh);
+    font-size: 36px;
+    font-weight: 600;
+  }
 }
 
 .MainPage {
-  width: 100%;
   height: 100%;
+  width: 80%;
   margin: 0 auto;
 
   display: flex;
@@ -43,7 +187,6 @@ body {
   align-items: center;
   justify-content: space-between;
 
-  background-color: $primary-background-color;
   color: $white;
 
   header {
@@ -53,9 +196,10 @@ body {
     align-items: center;
     gap: 30px;
     margin: 20px 0;
+    padding-right: 50px;
   }
 
-  span {
+  * > span {
     font-size: 35px;
     padding: 25px 0;
   }
@@ -113,35 +257,45 @@ $radius-size: 24px;
 /////////////////////////////////////////
 
 .WeekWeather {
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 1em;
 }
 
 .Card {
-  width: 200px;
-  padding: 5px 0px;
+  flex: 1 1 auto;
+  padding: 5px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   background-color: color.scale($primary-background-color, $lightness: 5%);
   border-radius: 5%;
 
+  font-weight: 600;
+
   .DateSpan {
     color: $white;
-    font-size: 20px;
+    font-size: 1.6em;
+  }
+
+  .DescriptionSpan {
+    color: color.scale($gray, $lightness: 50%);
+    font-size: 1.1em;
+    padding: 10px 0;
   }
 
   .TemperatureSpan {
     color: $white;
-    font-size: 16px;
+    font-size: 1.5em;
+    padding: 10px 0;
   }
 }
 
@@ -151,22 +305,24 @@ $radius-size: 24px;
 }
 
 .MiddleSpan {
-  margin: 20px auto;
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
   font-weight: 700;
 }
 
 .TodayHighlight {
+  width: 100%;
   display: grid;
   gap: 30px;
-  margin: 0 auto;
 
   grid-template-columns: repeat(2, 1fr);
 }
 
 .Bigcard {
-  width: 250px;
   background-color: color.scale($primary-background-color, $lightness: 5%);
 
+  flex: 1 1 auto;
   gap: 5px;
 
   display: flex;
@@ -193,4 +349,9 @@ $radius-size: 24px;
 
 .TwoElement {
   padding-bottom: 30px;
+}
+
+.searchActive {
+  filter: brightness(0.1);
+  transition: all 0.2s ease-in-out;
 }
