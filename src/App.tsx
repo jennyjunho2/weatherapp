@@ -109,18 +109,23 @@ function App() {
   };
 
   return (
-    <div className={`App`}>
+    <div className="App">
       <aside className="SidebarContainer">
         <div className="SearchContainer">
           <div className="SearchBox">
             <button
-              className="Search"
+              className="Search Spin"
               onClick={() => setSearchActive(true)}
             >
               <IconContext.Provider value={{ className: "SearchIcon" }}>
                 <MdSearch />
               </IconContext.Provider>
             </button>
+            <input
+              type="text"
+              className="InputSearch"
+              placeholder="Type to Search..."
+            />
           </div>
           <div
             className="LocationContainer"
@@ -131,31 +136,38 @@ function App() {
             </IconContext.Provider>
           </div>
         </div>
-        <div className="LocationCity">
-          <h2>{city}</h2>
-        </div>
-        <div className="DescContainer">
-          <h2>{desc}</h2>
-        </div>
-        <div className="SkyconContainer">
-          <ReactSkycon
-            color='white'
-            icon={IDtoAnimatedIcon(mainWeatherID) || SkyconType.CLEAR_DAY}
-            animate={true}
-            size={260}
-            resizeClear={true}
-          />
-        </div>
-        <div className="TemperatureContainer">
-          <h2>{isCelsius ? `${temp?.toFixed(2)}°C` : `${celtoFar(temp)?.toFixed(2)}°F`}</h2>
-          <h3>But Feels like {isCelsius ? `${tempFeel?.toFixed(2)}°C` : `${celtoFar(tempFeel)?.toFixed(2)}°F`}!</h3>
-        </div>
-        <div className="TempMinMaxContainer">
-          <h3>{isCelsius ? `${tempMin?.toFixed(2)}°C` : `${celtoFar(tempMin)?.toFixed(2)}°F`}</h3>
-          <h3>{isCelsius ? `${tempMax?.toFixed(2)}°C` : `${celtoFar(tempMax)?.toFixed(2)}°F`}</h3>
-        </div>
-        <div className="Date">
-          <h1>{today.toString()}</h1>
+        <div
+          className={`ExcludeSearchContainer ${searchActive ? "searchActive" : ""}`}
+          onClick={() => setSearchActive(false)}
+        >
+          <div className="LocationCity">
+            <h2>{city}</h2>
+          </div>
+          <div className="DescContainer">
+            <h2>{desc}</h2>
+          </div>
+          <div className="SkyconContainer">
+            <ReactSkycon
+              color='white'
+              icon={IDtoAnimatedIcon(mainWeatherID) || SkyconType.CLEAR_DAY}
+              animate={true}
+              size={260}
+              resizeClear={true}
+            />
+          </div>
+          <div className="TemperatureWrapper">
+            <div className="TemperatureContainer">
+              <h2>{isCelsius ? `${temp?.toFixed(2)}°C` : `${celtoFar(temp)?.toFixed(2)}°F`}</h2>
+              <h3>But Feels like {isCelsius ? `${tempFeel?.toFixed(2)}°C` : `${celtoFar(tempFeel)?.toFixed(2)}°F`}!</h3>
+            </div>
+            <div className="TempMinMaxContainer">
+              <h3>{isCelsius ? `${tempMin?.toFixed(2)}°C` : `${celtoFar(tempMin)?.toFixed(2)}°F`}</h3>
+              <h3>{isCelsius ? `${tempMax?.toFixed(2)}°C` : `${celtoFar(tempMax)?.toFixed(2)}°F`}</h3>
+            </div>
+          </div>
+          <div className="Date">
+            <h1>{today.toString()}</h1>
+          </div>
         </div>
       </aside >
       <div
@@ -228,7 +240,7 @@ function App() {
             </div>
           </div>
           <div className="MiddleSpan">
-            <span>⚡Today's Forecast⚡</span>
+            <span>⚡Today's Summary⚡</span>
           </div>
           <div className="TodayHighlight">
             <div className="Bigcard">

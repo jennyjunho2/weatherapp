@@ -6,6 +6,8 @@ $secondary-background-color: #0b2942;
 $white: #d6deeb;
 $gray: #293131;
 $transition-effect: cubic-bezier(0.075, 0.82, 0.165, 1);
+$search-transition-effect: all 0.5s ease-in-out;
+
 @mixin PosAbsoluteCenter($tp) {
   position: absolute;
   margin-left: 0;
@@ -44,7 +46,7 @@ div {
 
 // SideBar
 
-$search-icon-size: 30px;
+$search-icon-size: 35px;
 
 .SearchIcon {
   font-size: $search-icon-size;
@@ -75,57 +77,139 @@ $search-icon-size: 30px;
 
   .SearchContainer {
     width: 100%;
-    @include PosAbsoluteCenter(3vh);
 
+    padding: 2.5vh 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 100px;
 
     .SearchBox {
-      position: relative;
-      width: fit-content;
-      height: fit-content;
-    }
+      button {
+        position: relative;
+        color: $white;
+        background-color: inherit;
+        padding: 3px;
 
-    button {
-      width: fit-content;
-      color: $white;
-      background-color: inherit;
-      padding: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        font-size: $search-icon-size;
+        border: 0;
+        border-radius: $search-icon-size;
 
-      font-size: $search-icon-size;
+        cursor: pointer;
+        &::before,
+        &::after {
+          box-sizing: inherit;
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+      }
 
-      border: 3.5px solid $white;
-      border-radius: 50%;
+      // Spin Effect
+      .Spin {
+        height: $search-icon-size;
+        width: $search-icon-size;
+        &::before,
+        &::after {
+          top: 0;
+          left: 0;
+        }
 
-      cursor: pointer;
+        &:before {
+          border: 3.5px solid transparent;
+          border-radius: 50%;
+        }
+        &:focus::before {
+          border-top-color: $white;
+          border-right-color: $white;
+          border-bottom-color: $white;
+          transition: border-top-color 0.15s linear,
+            border-right-color 0.15s linear 0.1s,
+            border-bottom-color 0.15s linear 0.2s;
+        }
+
+        &::after {
+          border: 0 solid transparent;
+          border-radius: 50%;
+        }
+        &:focus::after {
+          border-top: 3.5px solid $white;
+          border-left-width: 3.5px;
+          border-right-width: 3.5px;
+          transform: rotate(270deg);
+          transition: transform 0.4s linear 0s,
+            border-left-width 0s linear 0.35s;
+        }
+      }
+
+      .InputSearch {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        top: 0;
+        left: 50px;
+        width: 100px;
+        height: 35px;
+        color: $white;
+        background-color: transparent;
+        border: none;
+        border-bottom: none;
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 18px;
+          letter-spacing: 2px;
+          font-weight: 100;
+        }
+      }
+
+      button:focus ~ .InputSearch {
+        visibility: visible;
+        opacity: 1;
+        width: 200px;
+        border-bottom: 1px solid $white;
+        transition: border-bottom 0.5s $transition-effect,
+          opacity 0.5s $transition-effect;
+        transition-delay: 0.5s;
+      }
+
+      .InputSearch:focus {
+        visibility: visible;
+        opacity: 1;
+        width: 200px;
+        border-bottom: 1px solid $white;
+      }
     }
   }
 
+  .ExcludeSearchContainer {
+    width: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
   .LocationCity {
-    @include PosAbsoluteCenter(15vh);
     font-size: 60px;
     font-weight: 600;
   }
 
   .DescContainer {
-    @include PosAbsoluteCenter(25vh);
     font-size: 38px;
     font-weight: 600;
     color: color.scale($gray, $lightness: 30%);
   }
 
-  .SkyconContainer {
-    @include PosAbsoluteCenter(35vh);
-    padding-bottom: 100px;
+  .TemperatureWrapper {
+    padding-bottom: 5vh;
   }
 
   .TemperatureContainer {
-    @include PosAbsoluteCenter(68vh);
     overflow: hidden;
     font-weight: bold;
 
@@ -161,7 +245,6 @@ $search-icon-size: 30px;
   }
 
   .TempMinMaxContainer {
-    @include PosAbsoluteCenter(76vh);
     display: flex;
     font-size: 24px;
     font-weight: bolder;
@@ -171,7 +254,6 @@ $search-icon-size: 30px;
   }
 
   .Date {
-    @include PosAbsoluteCenter(87.5vh);
     font-size: 36px;
     font-weight: 600;
   }
@@ -353,5 +435,7 @@ $radius-size: 24px;
 
 .searchActive {
   filter: brightness(0.1);
-  transition: all 0.2s ease-in-out;
+  color: black;
+  background-color: black;
+  transition: $search-transition-effect;
 }
