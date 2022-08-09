@@ -1,12 +1,14 @@
 import { IconContext } from "@react-icons/all-files";
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { MdMyLocation } from "@react-icons/all-files/md/MdMyLocation";
-import { MdSearch } from "@react-icons/all-files/md/MdSearch";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactSkycon, SkyconType } from 'react-skycons-extended';
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
-import GetWeatherIcon from "./utils/GetWeatherIcon";
-import { pos } from "./utils/interfaces";
+import LoadingCircle from "./components/LoadingCircle";
+import useMediaQuery from "./hooks/useMediaQuery";
+import { position, searchLocation } from "./utils/interfaces";
 import { celtoFar, degToDirection, getCurrentDate, IDtoAnimatedIcon } from "./utils/misc";
 
 function App() {
@@ -15,8 +17,9 @@ function App() {
   const [searchActive, setSearchActive] = useState<boolean>(false);
 
   // location hook
-  const [pos, setPos] = useState<pos>({ longitude: 126.8682, latitude: 37.5179 });
+  const [pos, setPos] = useState<position>({ longitude: 126.8682, latitude: 37.5179 });
   const [city, setCity] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // weather data hooks
   const [mainWeatherID, setMainWeatherID] = useState<number>(800);
@@ -45,7 +48,7 @@ function App() {
   const today = new Date(Date.now()).toDateString();
 
   // get location
-  function getLocation() {
+  const getCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         setPos({
@@ -58,13 +61,41 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    getLocation();
-    getWeather(pos);
-  }, []);
+  const setLocation = async (query: string) => {
+    const API_KEY = process.env.REACT_APP_GETLOCATION_APIKEY;
+    const BASE_URL = `http://api.positionstack.com/v1/forward?access_key=${API_KEY}&query=${query}&output=json`;
+    setLoading(true);
+    try {
+      console.log("Start Fetching...");
+      const rawJson = await (await fetch(BASE_URL)).json();
+
+      const dataArray: searchLocation[] = rawJson.data;
+      console.log(dataArray);
+
+      if (!dataArray.length) {
+        toast.error('Search Failed. Try Another Search.');
+        console.log("No data!");
+      } else {
+        for (const data of dataArray) {
+          if (data.confidence > 0.8) {
+            setPos({
+              latitude: data.latitude,
+              longitude: data.longitude
+            });
+            getWeather(pos);
+            break;
+          }
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setLoading(false);
+    setSearchActive(false);
+  }
 
   // get Weather by API key
-  const getWeather = async (location: pos) => {
+  const getWeather = async (location: position) => {
     const API_KEY = process.env.REACT_APP_WEATHER_APIKEY2;
     const BASE_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&units=metric&cnt=4&lang=en&mode=json&APPID=${API_KEY}`;
 
@@ -103,33 +134,44 @@ function App() {
     }
   };
 
-  const handleSearchClick = () => {
-    getLocation();
+  const handleLocationClick = () => {
+    getCurrentLocation();
     getWeather(pos);
   };
+
+  const handleEnterPress = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter") {
+      let keyword = (document.getElementById("SearchValue") as HTMLInputElement).value;
+      setLocation(keyword);
+    }
+  }
+
+  // Initial State
+  useEffect(() => {
+    getCurrentLocation();
+    getWeather(pos);
+  }, []);
 
   return (
     <div className="App">
       <aside className="SidebarContainer">
         <div className="SearchContainer">
-          <div className="SearchBox">
-            <button
-              className="Search Spin"
-              onClick={() => setSearchActive(true)}
-            >
-              <IconContext.Provider value={{ className: "SearchIcon" }}>
-                <MdSearch />
-              </IconContext.Provider>
-            </button>
+          <div className="SearchBox" onFocus={() => setSearchActive(true)}>
             <input
-              type="text"
-              className="InputSearch"
-              placeholder="Type to Search..."
+              type="search"
+              placeholder="Search City..."
+              className="search"
+              onKeyDown={handleEnterPress}
+              id="SearchValue"
             />
+            <span className="bar"></span>
+          </div>
+          <div className="LoadingCircle">
+            {loading ? <LoadingCircle /> : null}
           </div>
           <div
             className="LocationContainer"
-            onClick={handleSearchClick}
+            onClick={handleLocationClick}
           >
             <IconContext.Provider value={{ className: "LocationIcon" }}>
               <MdMyLocation />
@@ -151,7 +193,7 @@ function App() {
               color='white'
               icon={IDtoAnimatedIcon(mainWeatherID) || SkyconType.CLEAR_DAY}
               animate={true}
-              size={260}
+              size={useMediaQuery('(max-height: 650px') ? 150 : 260}
               resizeClear={true}
             />
           </div>
@@ -257,12 +299,12 @@ function App() {
               ></progress>
             </div>
             <div className="Bigcard TwoElement">
-              <span>Visibility</span>
-              <h2>{visibility}<span>miles</span></h2>
-            </div>
-            <div className="Bigcard TwoElement">
               <span>Air Pressure</span>
               <h2>{pressure}<span>hPa</span></h2>
+            </div>
+            <div className="Bigcard TwoElement">
+              <span>Visibility</span>
+              <h2>{visibility}<span>miles</span></h2>
             </div>
           </div>
           <footer>
@@ -277,6 +319,17 @@ function App() {
           </footer>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover
+      />
     </div >
   );
 }
