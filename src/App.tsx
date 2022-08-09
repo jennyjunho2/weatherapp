@@ -26,7 +26,7 @@ function App() {
   const [windDirection, setWindDirection] = useState<string | undefined>(undefined);
   const [windSpeed, setWindSpeed] = useState<number | undefined>(undefined);
   const [humidity, setHumidity] = useState<number | undefined>(undefined);
-  const [visibility, setVisibility] = useState<number | undefined>(undefined);
+  const [clouds, setClouds] = useState<number>(0);
   const [temp, setTemp] = useState<number | undefined>(undefined);
   const [tempMax, setTempMax] = useState<number | undefined>(undefined);
   const [tempMin, setTempMin] = useState<number | undefined>(undefined);
@@ -70,11 +70,9 @@ function App() {
       const rawJson = await (await fetch(BASE_URL)).json();
 
       const dataArray: searchLocation[] = rawJson.data;
-      console.log(dataArray);
 
       if (!dataArray.length) {
         toast.error('Search Failed. Try Another Search.');
-        console.log("No data!");
       } else {
         for (const data of dataArray) {
           if (data.confidence > 0.8) {
@@ -110,7 +108,7 @@ function App() {
       setMainWeatherID(today.weather[0].id)
       setCity(data.city.name);
       setHumidity(today.main.humidity);
-      setVisibility(today.visibility);
+      setClouds(today.clouds.all);
       setWindDirection(degToDirection(today.wind.deg));
       setWindSpeed(today.wind.speed);
       setTemp(today.main.temp);
@@ -286,12 +284,12 @@ function App() {
           </div>
           <div className="TodayHighlight">
             <div className="Bigcard">
-              <span>Wind Status</span>
+              <span>Wind Status 🍃</span>
               <h2>{windSpeed}<span>mph</span></h2>
               <span>{windDirection}</span>
             </div>
             <div className="Bigcard">
-              <span>Humidity</span>
+              <span>Humidity 💧</span>
               <h2>{humidity}<span>%</span></h2>
               <progress
                 value={humidity}
@@ -299,12 +297,12 @@ function App() {
               ></progress>
             </div>
             <div className="Bigcard TwoElement">
-              <span>Air Pressure</span>
+              <span>Air Pressure 🌀</span>
               <h2>{pressure}<span>hPa</span></h2>
             </div>
             <div className="Bigcard TwoElement">
-              <span>Visibility</span>
-              <h2>{visibility}<span>miles</span></h2>
+              <span>Clouds ☁️</span>
+              <h2>{clouds}<span>%</span></h2>
             </div>
           </div>
           <footer>
