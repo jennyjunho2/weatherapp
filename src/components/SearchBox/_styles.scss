@@ -1,0 +1,82 @@
+@use "sass:color";
+@import "../../reset.css";
+
+$primary-background-color: #011627;
+$secondary-background-color: #0b2942;
+$white: #d6deeb;
+$gray: #293131;
+$blue: #26547c;
+$light-gray: #a1a1a1;
+$transition-effect: cubic-bezier(0.075, 0.82, 0.165, 1);
+$search-transition-effect: all 0.5s ease-in-out;
+$mobile-transition-max-width: 1100px;
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+.SearchBox {
+  position: relative;
+
+  .search {
+    @include size(15px, 15px);
+    position: relative;
+    padding: 5px;
+
+    background-color: $white;
+    color: $white;
+
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+
+    cursor: pointer;
+    outline: none;
+    transition: all 0.15s $transition-effect;
+    ~ .bar {
+      @include size(4px, 20px);
+      display: block;
+      position: absolute;
+      top: 16px;
+      right: 0px;
+
+      opacity: 1;
+      background: $white;
+
+      border-radius: 4px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+
+      transform: rotate(-45deg);
+      transition: opacity 0.15s ease;
+    }
+
+    &::placeholder {
+      color: $white;
+    }
+
+    &:focus {
+      @include size(150px, 25px);
+      border-radius: 3px;
+      color: $blue;
+      cursor: initial;
+      &::placeholder {
+        color: $light-gray;
+      }
+      ~ .bar {
+        box-shadow: none;
+        opacity: 0;
+        top: 5px;
+        right: 0;
+      }
+    }
+  }
+}
+
+.dropdownContainer {
+  position: absolute;
+  div {
+    background-color: $white;
+    color: $primary-background-color;
+  }
+}

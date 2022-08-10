@@ -25,8 +25,7 @@ export function getCurrentDate(offset: number = 0): string {
     }`;
 }
 
-export function degToDirection(deg: number | undefined): string | undefined {
-  if (deg === undefined) { return undefined }
+export function degToDirection(deg: number): string {
   const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
   const dir = Math.round(deg * 8 / 360);
   return directions[(dir + 8) % 8];

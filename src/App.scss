@@ -1,4 +1,5 @@
 @use "sass:color";
+@import "./reset.css";
 
 $primary-background-color: #011627;
 $secondary-background-color: #0b2942;
@@ -89,63 +90,7 @@ div {
     justify-content: space-around;
     align-items: center;
     gap: 100px;
-
-    .SearchBox {
-      position: relative;
-
-      .search {
-        @include size(15px, 15px);
-        position: relative;
-        padding: 5px;
-
-        background-color: $white;
-        color: $white;
-
-        border: 0;
-        border-radius: 50%;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
-
-        cursor: pointer;
-        outline: none;
-        transition: all 0.15s $transition-effect;
-        ~ .bar {
-          @include size(4px, 15px);
-          display: block;
-          position: absolute;
-          top: 17px;
-          right: -9px;
-
-          opacity: 1;
-          background: $white;
-
-          border-radius: 4px;
-          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
-
-          transform: rotate(45deg);
-          transition: opacity 0.15s ease;
-        }
-
-        &::placeholder {
-          color: $white;
-        }
-
-        &:focus {
-          @include size(25px, 200px);
-          border-radius: 3px;
-          color: $blue;
-          cursor: initial;
-          &::placeholder {
-            color: $light-gray;
-          }
-          ~ .bar {
-            box-shadow: none;
-            opacity: 0;
-            top: 5px;
-            right: 0;
-          }
-        }
-      }
-    }
+    z-index: 100;
 
     .LocationIcon {
       font-size: 50px;
@@ -235,9 +180,9 @@ div {
   .Date {
     font-size: 36px;
     font-weight: 600;
+    padding-bottom: 10px;
     @media screen and (max-width: $mobile-transition-max-width) {
       font-size: min(10vw, 36px);
-      padding-bottom: 10px;
     }
   }
 }
