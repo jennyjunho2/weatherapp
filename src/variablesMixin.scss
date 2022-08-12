@@ -1,0 +1,29 @@
+$primary-background-color: #011627;
+$secondary-background-color: #0b2942;
+$white: #d6deeb;
+$gray: #293131;
+$blue: #26547c;
+$light-gray: #a1a1a1;
+$transition-effect: cubic-bezier(0.075, 0.82, 0.165, 1);
+$search-transition-effect: all 0.5s ease-in-out;
+$mobile-transition-max-width: 1100px;
+
+@mixin PosAbsoluteCenter($tp) {
+  position: absolute;
+  margin-left: 0;
+  margin-right: 0;
+  left: 0;
+  right: 0;
+  top: $tp;
+}
+
+@mixin size($h, $w) {
+  height: $h;
+  width: $w;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
