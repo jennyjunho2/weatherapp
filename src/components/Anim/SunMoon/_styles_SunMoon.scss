@@ -1,0 +1,41 @@
+@import "../../../variablesMixin.scss";
+
+@keyframes move_right {
+  0% {
+    transform: translateX(300%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.SunMoon {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  transform: translateX(300%);
+
+  @include size(100px, 100px);
+  margin: 0 auto;
+  animation: move_right 0.5s ease 1s forwards;
+
+  .Circle {
+    @include size(100px, 100px);
+    border-radius: 50%;
+    display: block;
+  }
+}
+
+.SunMoon-Day {
+  background-color: #ffdb01;
+  // inside sun
+  box-shadow: inset -10px 0px 0px #ffbb00, inset 5px 0px 0px #fff,
+    inset -20px 0px 0px 10px #ffd201, inset -10px 0px 0px 10px #ffd000,
+    0px 0px 150px 10px #fff;
+}
+
+.SunMoon-Night {
+  background-color: #ebf3fe;
+  box-shadow: inset -15px 0px 0px #d8e8f7, inset 10px 0px 0px #fffffff3,
+    inset -10px 0px 0px 10px #e2eefa, 0px 0px 150px 10px #fff;
+}

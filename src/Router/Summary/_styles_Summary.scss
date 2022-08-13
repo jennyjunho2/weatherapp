@@ -1,17 +1,6 @@
 @use "sass:color";
-@import "./reset.css";
-@import "./variablesMixin.scss";
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: $primary-background-color;
-  transition: all 0.3s ease-in-out;
-}
-
-div {
-  display: block;
-}
+@import "../../reset.css";
+@import "../../variablesMixin.scss";
 
 .App {
   display: grid;

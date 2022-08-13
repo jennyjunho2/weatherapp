@@ -1,0 +1,85 @@
+@use "sass:color";
+@import "../../reset.css";
+@import "../../variablesMixin.scss";
+
+.TopContainer {
+  display: grid;
+  grid-template-columns: 450px 1fr;
+  filter: brightness(1);
+  transition: all 0.2s ease-in-out;
+  @media only screen and (max-width: 1100px) {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .MainContainer {
+    height: 100%;
+    width: 100%;
+    filter: brightness(1);
+    transition: filter 0.3s ease-in-out;
+    overflow: hidden;
+
+    .MainCanvas {
+      height: 100%;
+      width: 100%;
+      margin: 0 auto;
+
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: space-between;
+
+      color: $white;
+
+      header {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        background-color: inherit;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 30px;
+        margin: 20px 0;
+        margin-right: 100px;
+
+        $radius-size: 24px;
+
+        .header-TempIcon {
+          width: $radius-size;
+          height: $radius-size;
+
+          font-size: 18px;
+          font-weight: 600;
+
+          background-color: $primary-background-color;
+
+          border-radius: 50%;
+          border: none;
+          padding: 10px;
+          @include flex-center();
+
+          cursor: pointer;
+          transition: all 0.4s $transition-effect;
+        }
+
+        .activeTransparent {
+          background-color: rgba(255, 255, 255, 0.651);
+          color: #000;
+        }
+      }
+
+      .MainDisplayCard {
+        @include absolute-center;
+        width: 50%;
+        height: 80%;
+
+        border-radius: 15px;
+
+        background-color: rgba(255, 255, 255, 0.8);
+        z-index: 100;
+      }
+    }
+  }
+}

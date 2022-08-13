@@ -1,0 +1,57 @@
+@import "../../../reset.css";
+@import "../../../variablesMixin.scss";
+
+$river-color: #053e6c;
+
+@keyframes up {
+  0% {
+    bottom: -7%;
+  }
+  100% {
+    bottom: 0%;
+  }
+}
+
+@keyframes Waves {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(30px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(45px);
+    opaity: 0;
+    width: 0;
+  }
+}
+
+#River {
+  position: absolute;
+  width: 100%;
+  bottom: -7%;
+  height: 7%;
+
+  background-color: $river-color;
+
+  animation: up 0.5s ease forwards 0.5s;
+}
+
+$wave-color: rgba(255, 255, 255, 0.3);
+
+#River-Floating {
+  position: absolute;
+  @include size(3px, 12px);
+
+  top: 85%;
+  left: 45%;
+  animation: Waves 2s linear infinite 2s;
+  opacity: 0;
+  z-index: 100;
+
+  box-shadow: -80px -30px $wave-color, 100px -15px $wave-color,
+    -200px -5px $wave-color, 300px -45px $wave-color, 400px -15px $wave-color,
+    -375px -20px $wave-color;
+}

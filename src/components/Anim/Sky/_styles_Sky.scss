@@ -1,0 +1,32 @@
+@import "../../../reset.css";
+@import "../../../variablesMixin.scss";
+
+@keyframes down {
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: 100%;
+  }
+}
+
+.Sky {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 0;
+  animation: down 0.5s ease forwards;
+}
+
+.Sky-Night {
+  background-image: linear-gradient(
+    to top,
+    $primary-background-color 0%,
+    #270550 100%
+  );
+}
+
+.Sky-Day {
+  background-image: linear-gradient(to top, #a4e0fa 0%, #29a8df 100%);
+}

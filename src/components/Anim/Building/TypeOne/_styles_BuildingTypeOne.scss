@@ -1,0 +1,100 @@
+@import "../../../../reset.css";
+@import "../../../../variablesMixin.scss";
+
+@keyframes glow {
+  0% {
+    filter: brightness(0.75);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+@keyframes glow2 {
+  0% {
+    filter: brightness(0.5);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+.BuildingTypeOne {
+  position: absolute;
+  left: 0%;
+  bottom: 7%;
+  @include size(480px, 140px);
+  background-color: black;
+}
+
+.BuildingTypeOne-Day {
+  background-color: $building-day-color;
+}
+
+.BuildingTypeOne-Night {
+  background-color: $building-night-color;
+}
+
+.BuildingTop {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  height: 3%;
+  background-color: $window-night-color2;
+}
+
+.BuildingWindow {
+  position: absolute;
+  right: 0;
+  @include size(10px, 65%);
+}
+
+.BuildingWindow-Day {
+  background-color: $window-day-color;
+}
+
+.BuildingWindow-Night {
+  background-color: $window-night-color1;
+  animation: glow 10s linear infinite;
+}
+
+.FiveSec {
+  animation: glow 5s linear infinite;
+}
+
+.SevenSec {
+  animation: glow 7s linear infinite;
+}
+
+.TenSec {
+  animation: glow2 10s linear infinite;
+}
+
+////////////////////////////////////////////
+.One {
+  top: 10%;
+}
+.Two {
+  top: 20%;
+}
+.Three {
+  top: 30%;
+}
+.Four {
+  top: 40%;
+}
+.Five {
+  top: 50%;
+}
+.Six {
+  top: 60%;
+}
+.Seven {
+  top: 70%;
+}
+.Eight {
+  top: 80%;
+}
+.Nine {
+  top: 90%;
+}

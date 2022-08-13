@@ -14,6 +14,11 @@ export const currentCoordinateAtom = atom<position>({
   },
 });
 
+export const isDayAtom = atom<boolean>({
+  key: "isDay",
+  default: true,
+});
+
 export const isSearchActiveAtom = atom<boolean>({
   key: "searchActive",
   default: false,
