@@ -2,7 +2,7 @@ import BuildingTypeOne from "../Building/TypeOne/BuildingTypeOne";
 
 function BuildingRowOne() {
   return (
-    <BuildingTypeOne />
+    <BuildingTypeOne leftOffset={0} />
   )
 }
 

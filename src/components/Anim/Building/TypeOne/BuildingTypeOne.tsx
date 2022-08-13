@@ -3,13 +3,19 @@ import { isDayAtom } from "../../../../utils/atoms";
 import "./_styles_BuildingTypeOne.scss";
 
 interface IBuildingTypeOneProps {
-  leftOffset?: number;
+  leftOffset: number;
 }
 
 function BuildingTypeOne({ leftOffset = 0 }: IBuildingTypeOneProps) {
   const isDay = useRecoilValue<boolean>(isDayAtom);
+
   return (
-    <div className={`BuildingTypeOne ${isDay ? "BuildingTypeOne-Day" : "BuildingTypeOne-Night"}`}>
+    <div
+      className={`BuildingTypeOne ${isDay ? "BuildingTypeOne-Day" : "BuildingTypeOne-Night"}`}
+      style={{
+        left: `${leftOffset}px`,
+      }}
+    >
       <div></div>
       <div className={`BuildingTop FiveSec ${isDay ? "BuildingWindow-Day" : "BuildingWindow-Night"}`}></div>
       <div className={`BuildingWindow One SevenSec ${isDay ? "BuildingWindow-Day" : "BuildingWindow-Night"}`}></div>
