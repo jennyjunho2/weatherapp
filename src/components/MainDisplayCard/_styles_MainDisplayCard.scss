@@ -1,0 +1,11 @@
+@import "../../variablesMixin.scss";
+
+.MainDisplayCard {
+  @include absolute-center;
+  width: 46.354%;
+  height: 75%;
+
+  border-radius: 15px;
+
+  background-color: rgba(255, 255, 255, 0.8);
+}

@@ -1,0 +1,73 @@
+@import "../../../../reset.css";
+@import "../../../../variablesMixin.scss";
+
+.BuildingTypeFour {
+  position: absolute;
+  left: 0%;
+  bottom: 7%;
+  @include size(388px, 183px);
+
+  .BuildingTop {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 3%;
+    background-color: $window-day-color2;
+  }
+
+  .BuildingWindow {
+    position: absolute;
+    left: 0;
+    @include size(10px, 70px);
+  }
+
+  ////////////////////////////////////////////
+  .TypeThreeOne {
+    top: 12.5%;
+  }
+  .TypeThreeTwo {
+    top: 25%;
+  }
+  .TypeThreeThree {
+    top: 37.5%;
+  }
+  .TypeThreeFour {
+    top: 50%;
+  }
+  .TypeThreeFive {
+    top: 62.5%;
+  }
+  .TypeThreeSix {
+    top: 75%;
+  }
+  .TypeThreeSeven {
+    top: 87.5%;
+  }
+}
+
+.BuildingTypeFour-Day {
+  background-color: $building-day-shadow-color;
+
+  .WindowTypeTwo {
+    background-color: $window-day-color2;
+  }
+}
+
+.BuildingTypeFour-Night {
+  background-color: $building-night-shadow-color;
+  .FiveSec {
+    animation: glow 5s linear infinite;
+  }
+
+  .SevenSec {
+    animation: glow 7s linear infinite;
+  }
+
+  .TenSec {
+    animation: glow2 10s linear infinite;
+  }
+}
+
+.BuildingWindow-Night {
+  background-color: $window-night-color1;
+}

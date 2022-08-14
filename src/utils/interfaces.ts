@@ -9,6 +9,11 @@ export interface searchLocation {
   longitude: number;
 }
 
+export interface IBuildingTypeProps {
+  leftOffset: number;
+  opacity: number;
+}
+
 export interface WeatherInfo {
   city: string;
   windDirection: string;

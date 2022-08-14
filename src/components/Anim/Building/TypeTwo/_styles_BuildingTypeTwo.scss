@@ -1,0 +1,71 @@
+@import "../../../../reset.css";
+@import "../../../../variablesMixin.scss";
+
+.BuildingTypeTwo {
+  position: absolute;
+  left: 0%;
+  bottom: 7%;
+  @include size(297px, 183px);
+
+  .BuildingTop {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 3%;
+    background-color: $window-day-color2;
+  }
+
+  .BuildingWindow {
+    position: absolute;
+    right: 0;
+    @include size(10px, 65%);
+  }
+
+  ////////////////////////////////////////////
+  .TypeTwoOne {
+    top: 16%;
+  }
+  .TypeTwoTwo {
+    top: 32%;
+  }
+  .TypeTwoThree {
+    top: 48%;
+  }
+  .TypeTwoFour {
+    top: 64%;
+  }
+  .TypeTwoFive {
+    top: 80%;
+  }
+}
+
+.BuildingTypeTwo-Day {
+  background-color: $building-day-color;
+
+  .WindowTypeOne {
+    background-color: $window-day-color2;
+  }
+
+  .WindowTypeTwo {
+    background-color: $window-day-color2;
+  }
+}
+
+.BuildingTypeTwo-Night {
+  background-color: $building-night-color;
+  .FiveSec {
+    animation: glow 5s linear infinite;
+  }
+
+  .SevenSec {
+    animation: glow 7s linear infinite;
+  }
+
+  .TenSec {
+    animation: glow2 10s linear infinite;
+  }
+}
+
+.BuildingWindow-Night {
+  background-color: $window-night-color1;
+}

@@ -4,6 +4,7 @@ import BuildingRowOne from "../../components/Anim/BuildingRowOne/BuildingRowOne"
 import River from "../../components/Anim/River/River";
 import Sky from "../../components/Anim/Sky/Sky";
 import SunMoon from "../../components/Anim/SunMoon/SunMoon";
+import MainDisplayCard from "../../components/MainDisplayCard/MainDisplayCard";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { currentCoordinateAtom, isCelsiusAtom, isDayAtom, isSearchActiveAtom, weatherDataAtom } from "../../utils/atoms";
 import { position, WeatherInfo } from "../../utils/interfaces";
@@ -140,10 +141,12 @@ function Mainpage() {
             </div>
             <button onClick={() => toggleDayNnite()}>Day and Nite</button>
           </header>
-          <div className="MainDisplayCard"></div>
+          {/* <div className="Zindex100">
+            <MainDisplayCard />
+          </div> */}
           <SunMoon />
           <River />
-          <BuildingRowOne />
+          <BuildingRowOne leftOffset={20} opacity={1} />
         </div>
       </div>
     </div>
