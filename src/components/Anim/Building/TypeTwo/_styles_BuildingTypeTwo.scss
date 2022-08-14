@@ -7,6 +7,17 @@
   bottom: 7%;
   @include size(297px, 183px);
 
+  .ledge {
+    position: absolute;
+    top: 3%;
+    left: 0px;
+    width: 0px;
+    height: 0px;
+    border-top: 75px solid rgba(0, 0, 0, 0.25);
+    border-right: 160px solid transparent;
+    z-index: 500;
+  }
+
   .BuildingTop {
     position: absolute;
     top: 0%;

@@ -15,7 +15,41 @@ function BuildingTypeFour({ leftOffset, opacity }: IBuildingTypeProps) {
         opacity: `${opacity}`,
       }}
     >
-      <div className={`BuildingTop FiveSec ${isDay ? "BuildingWindow-Day" : "BuildingWindow-Night"}`}></div>
+      {isDay ? <div className="ledge"></div> : null}
+      <div className={`BuildingTop ${isDay ? "BuildingWindow-Day" : "BuildingWindow-Night"}`}></div>
+      <div className={`BuildingShadow ${isDay ? "BuildingShadow-Day" : "BuildingShadow-Night"}`}></div>
+      <div className={`BuildingFour-Windows ${isDay ? "BuildingWindow-Day" : "BuildingWindow-Night"}`}>
+        <div className="BuildingFour-WindowRowOne">
+          <div className={`BuildingFour-Window FiveSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+          <div className={`BuildingFour-Window ${isDay ? "BuildingFour-NotWindow-Day" : "BuildingFour-NotWindow-Night"}`}></div>
+          <div className={`BuildingFour-Window TenSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+        </div>
+        <div className="BuildingFour-WindowRowTwo">
+          <div className={`BuildingFour-Window SevenSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+          <div className={`BuildingFour-Window SevenSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+          <div className={`BuildingFour-Window ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+        </div>
+        <div className="BuildingFour-WindowRowThree">
+          <div className={`BuildingFour-Window TenSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+          <div className={`BuildingFour-Window FiveSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+          <div className={`BuildingFour-Window ${isDay ? "BuildingFour-NotWindow-Day" : "BuildingFour-NotWindow-Night"}`}></div>
+        </div>
+        <div className="BuildingFour-WindowRowFour">
+          <div className={`BuildingFour-Window ${isDay ? "BuildingFour-NotWindow-Day" : "BuildingFour-NotWindow-Night"}`}></div>
+          <div className={`BuildingFour-Window TenSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+          <div className={`BuildingFour-Window ${isDay ? "BuildingFour-NotWindow-Day" : "BuildingFour-NotWindow-Night"}`}></div>
+        </div>
+        <div className="BuildingFour-WindowRowFive">
+          <div className={`BuildingFour-Window TenSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+          <div className={`BuildingFour-Window ${isDay ? "BuildingFour-NotWindow-Day" : "BuildingFour-NotWindow-Night"}`}></div>
+          <div className={`BuildingFour-Window ${isDay ? "BuildingFour-NotWindow-Day" : "BuildingFour-NotWindow-Night"}`}></div>
+        </div>
+        <div className="BuildingFour-WindowRowSix">
+          <div className={`BuildingFour-Window FiveSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+          <div className={`BuildingFour-Window SevenSec ${isDay ? "BuildingFour-Window-Day" : "BuildingFour-Window-Night"}`}></div>
+          <div className={`BuildingFour-Window ${isDay ? "BuildingFour-NotWindow-Day" : "BuildingFour-NotWindow-Night"}`}></div>
+        </div>
+      </div>
     </div >
   );
 }

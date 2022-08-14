@@ -7,6 +7,17 @@
   bottom: 7%;
   @include size(480px, 140px);
 
+  .ledge {
+    position: absolute;
+    top: 3%;
+    left: 0px;
+    width: 0px;
+    height: 0px;
+    border-top: 60px solid rgba(0, 0, 0, 0.25);
+    border-right: 140px solid transparent;
+    z-index: 500;
+  }
+
   .TypeOneShadow {
     position: absolute;
     left: 0;

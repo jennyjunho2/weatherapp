@@ -18,6 +18,7 @@ function BuildingTypeOne({ leftOffset = 0, opacity, isShadow }: IBuildingTypeOne
         opacity: `${opacity}`,
       }}
     >
+      {isDay ? <div className="ledge"></div> : null}
       {isShadow ? <div className="TypeOneShadow"></div> : null}
       <div className={`BuildingTop FiveSec ${isDay ? "BuildingWindow-Day" : "BuildingWindow-Night"}`}></div>
       <div className={`BuildingWindow TypeOneOne SevenSec ${isDay ? "BuildingWindow-Day" : "BuildingWindow-Night"}`}></div>

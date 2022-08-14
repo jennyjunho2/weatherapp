@@ -2,11 +2,47 @@
 @import "../../../../variablesMixin.scss";
 
 //TODO: Make Building!
+
+@mixin window-trait() {
+  @include size(22px, 22px);
+}
+
+@mixin sub-window($t) {
+  position: absolute;
+  top: $t;
+  left: 10%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .BuildingTypeFour {
   position: absolute;
   left: 0%;
   bottom: 7%;
   @include size(388px, 183px);
+
+  .ledge {
+    position: absolute;
+    top: 3%;
+    left: 0px;
+    width: 0px;
+    height: 0px;
+    border-top: 110px solid rgba(0, 0, 0, 0.25);
+    border-right: 150px solid transparent;
+    z-index: 500;
+  }
+
+  .BuildingShadow {
+    position: absolute;
+    width: 10%;
+    height: 100%;
+  }
+
+  .BuildingShadow-Day {
+    background-color: $building-day-shadow-color;
+  }
 
   .BuildingTop {
     position: absolute;
@@ -14,40 +50,63 @@
     width: 100%;
     height: 3%;
     background-color: $window-day-color2;
+    z-index: 100;
   }
 
-  .BuildingWindow {
+  .BuildingFour-Windows {
     position: absolute;
     left: 0;
-    @include size(10px, 70px);
-  }
+    width: 100%;
 
-  ////////////////////////////////////////////
-  .TypeThreeOne {
-    top: 12.5%;
-  }
-  .TypeThreeTwo {
-    top: 25%;
-  }
-  .TypeThreeThree {
-    top: 37.5%;
-  }
-  .TypeThreeFour {
-    top: 50%;
-  }
-  .TypeThreeFive {
-    top: 62.5%;
-  }
-  .TypeThreeSix {
-    top: 75%;
-  }
-  .TypeThreeSeven {
-    top: 87.5%;
+    .BuildingFour-Window {
+      @include window-trait();
+      background-color: $window-night-color1;
+    }
+
+    .BuildingFour-Window-Day {
+      background-color: $window-day-color2;
+    }
+
+    .BuildingFour-Window-Night {
+      background-color: $window-night-color2;
+    }
+
+    .BuildingFour-NotWindow-Day {
+      background-color: $building-day-color;
+    }
+
+    .BuildingFour-NotWindow-Night {
+      background-color: $building-night-color;
+    }
+
+    .BuildingFour-WindowRowOne {
+      @include sub-window(30px);
+    }
+
+    .BuildingFour-WindowRowTwo {
+      @include sub-window(90px);
+    }
+
+    .BuildingFour-WindowRowThree {
+      @include sub-window(150px);
+    }
+
+    .BuildingFour-WindowRowFour {
+      @include sub-window(210px);
+    }
+
+    .BuildingFour-WindowRowFive {
+      @include sub-window(270px);
+    }
+
+    .BuildingFour-WindowRowSix {
+      @include sub-window(330px);
+    }
   }
 }
 
 .BuildingTypeFour-Day {
-  background-color: $building-day-shadow-color;
+  background-color: $building-day-color;
 
   .WindowTypeTwo {
     background-color: $window-day-color2;

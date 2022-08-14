@@ -14,6 +14,7 @@ function BuildingTypeTwo({ leftOffset = 0, opacity }: IBuildingTypeProps) {
         opacity: `${opacity}`,
       }}
     >
+      {isDay ? <div className="ledge"></div> : null}
       <div className={`BuildingTop FiveSec ${isDay ? "BuildingWindow-Day" : "BuildingWindow-Night"}`}></div>
       <div className={`BuildingWindow WindowTypeOne TypeTwoOne SevenSec ${isDay ? "BuildingWindow-Day" : "BuildingWindow-Night"}`}></div>
       <div className={`BuildingWindow WindowTypeTwo TypeTwoTwo ${isDay ? "BuildingWindow-Day" : ""}`}></div>
