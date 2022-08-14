@@ -6,6 +6,7 @@ import "./_styles_BuildingTypeFour.scss";
 function BuildingTypeFour({ leftOffset, opacity }: IBuildingTypeProps) {
   const isDay = useRecoilValue<boolean>(isDayAtom);
 
+  //TODO: Make Building!
   return (
     <div
       className={`BuildingTypeFour ${isDay ? "BuildingTypeFour-Day" : "BuildingTypeFour-Night"}`}
