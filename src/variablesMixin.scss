@@ -4,6 +4,8 @@ $white: #d6deeb;
 $gray: #293131;
 $blue: #26547c;
 $light-gray: #a1a1a1;
+$red: #ff0202;
+$red-black: #3d0404;
 $transition-effect: cubic-bezier(0.075, 0.82, 0.165, 1);
 $search-transition-effect: all 0.5s ease-in-out;
 $mobile-transition-max-width: 1100px;
@@ -20,6 +22,17 @@ $window-day-color2: #fff;
 $window-night-color1: #ffff8c;
 $window-night-color2: #ffffa0;
 $window-night-color3: #575a35;
+
+$bridge-day-color: #9e9e9e;
+$bridge-night-color: #9e9e9e5b;
+
+$pillar-day-color: rgb(177, 177, 156);
+$pillar-night-color: rgb(59, 59, 52);
+
+$streetLight-color: #3f3f3f;
+$streetLight-color2: #424242;
+$streetLight-light-color: #dadace;
+$streetLight-night-light-color: #f5f57f;
 
 @mixin PosAbsoluteCenter($tp) {
   position: absolute;

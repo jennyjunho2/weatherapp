@@ -1,0 +1,179 @@
+@import "../../../../reset.css";
+@import "../../../../variablesMixin.scss";
+
+@mixin window-trait() {
+  $window-size: 27px;
+  @include size($window-size, $window-size);
+}
+
+@mixin sub-window($t) {
+  position: absolute;
+  top: $t;
+  left: 10%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@keyframes Antennalight {
+  0% {
+    background-color: $red;
+  }
+  50% {
+    background-color: $red-black;
+  }
+  100% {
+    background-color: $red;
+  }
+}
+
+.BuildingTypeFive {
+  position: absolute;
+  left: 0%;
+  bottom: 7%;
+  @include size(480px, 200px);
+
+  .AntennaContainer {
+    @include flex-center();
+    $antenna-length: 60px;
+    gap: 100px;
+
+    position: absolute;
+    top: -$antenna-length;
+    left: 0;
+    width: 100%;
+    height: $antenna-length;
+
+    .Antenna {
+      height: $antenna-length;
+      width: 8px;
+      background-color: $night-background-color;
+
+      .AntennaTop {
+        $antenna-top-size: 12px;
+        position: relative;
+        top: -6px;
+        left: -2px;
+
+        @include size($antenna-top-size, $antenna-top-size);
+        background-color: $red;
+        border-radius: 50%;
+        opacity: 1;
+        animation: Antennalight 15s linear infinite;
+      }
+    }
+  }
+
+  .ledge {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0px;
+    height: 0px;
+    border-top: 140px solid rgba(0, 0, 0, 0.25);
+    border-right: 150px solid transparent;
+    z-index: 500;
+  }
+
+  .BuildingShadow {
+    position: absolute;
+    width: 10%;
+    height: 100%;
+  }
+
+  .BuildingShadow-Day {
+    background-color: $building-day-shadow-color;
+  }
+
+  .BuildingTop {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 3%;
+    background-color: $window-day-color2;
+    z-index: 100;
+  }
+
+  .BuildingFive-Windows {
+    position: absolute;
+    left: 0;
+    width: 100%;
+
+    .BuildingFive-Window {
+      @include window-trait();
+      background-color: $window-night-color1;
+    }
+
+    .BuildingFive-Window-Day {
+      background-color: $window-day-color2;
+    }
+
+    .BuildingFive-Window-Night {
+      background-color: $window-night-color2;
+    }
+
+    .BuildingFive-NotWindow-Day {
+      background-color: $building-day-color;
+    }
+
+    .BuildingFive-NotWindow-Night {
+      background-color: $building-night-color;
+    }
+
+    .BuildingFive-WindowRowOne {
+      @include sub-window(30px);
+    }
+
+    .BuildingFive-WindowRowTwo {
+      @include sub-window(90px);
+    }
+
+    .BuildingFive-WindowRowThree {
+      @include sub-window(150px);
+    }
+
+    .BuildingFive-WindowRowFour {
+      @include sub-window(210px);
+    }
+
+    .BuildingFive-WindowRowFive {
+      @include sub-window(270px);
+    }
+
+    .BuildingFive-WindowRowSix {
+      @include sub-window(330px);
+    }
+
+    .BuildingFive-WindowRowSeven {
+      @include sub-window(390px);
+    }
+  }
+}
+
+.BuildingTypeFive-Day {
+  background-color: $building-day-color;
+
+  .WindowTypeTwo {
+    background-color: $window-day-color2;
+  }
+}
+
+.BuildingTypeFive-Night {
+  background-color: $building-night-shadow-color;
+  .FiveSec {
+    animation: glow 5s linear infinite;
+  }
+
+  .SevenSec {
+    animation: glow 7s linear infinite;
+  }
+
+  .TenSec {
+    animation: glow2 10s linear infinite;
+  }
+}
+
+.BuildingWindow-Night {
+  background-color: $window-night-color1;
+}

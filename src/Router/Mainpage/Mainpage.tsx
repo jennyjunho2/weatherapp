@@ -141,7 +141,7 @@ function Mainpage() {
             </div>
             <button onClick={() => toggleDayNnite()}>Day and Nite</button>
           </header>
-          {/* <div className="Zindex100">
+          {/* <div className="Zindex1000">
             <MainDisplayCard />
           </div> */}
           <SunMoon />
