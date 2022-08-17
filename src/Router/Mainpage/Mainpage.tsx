@@ -144,9 +144,12 @@ function Mainpage() {
           {/* <div className="Zindex1000">
             <MainDisplayCard />
           </div> */}
-          <SunMoon />
+          <div className="Zindex1">
+            <SunMoon />
+          </div>
           <River />
-          <BuildingRowOne leftOffset={20} opacity={1} />
+          <BuildingRowOne leftOffset={0} opacity={1} />
+          <BuildingRowOne leftOffset={1400} opacity={1} />
         </div>
       </div>
     </div>

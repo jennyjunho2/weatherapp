@@ -1,0 +1,123 @@
+@import "../../../reset.css";
+@import "../../../variablesMixin.scss";
+
+@keyframes moveTrain {
+  from {
+    left: -140px;
+  }
+  to {
+    left: 200px;
+  }
+}
+
+.TrainContainer {
+  position: absolute;
+  bottom: 7%;
+  width: 200px;
+  height: 200px;
+
+  background-color: transparent;
+
+  .Track {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 20px;
+
+    &.TrackDay {
+      background-color: $track-day-color;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        @include size(0px, 0px);
+        box-shadow: 10px 10px 0px 5px $dark-gray, 30px 10px 0px 5px $dark-gray,
+          50px 10px 0px 5px $dark-gray, 70px 10px 0px 5px $dark-gray,
+          90px 10px 0px 5px $dark-gray, 110px 10px 0px 5px $dark-gray,
+          130px 10px 0px 5px $dark-gray, 150px 10px 0px 5px $dark-gray,
+          170px 10px 0px 5px $dark-gray;
+      }
+    }
+
+    &.TrackNight {
+      background-color: $track-night-color;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        @include size(0px, 0px);
+        box-shadow: 10px 10px 0px 5px $dark-gray, 30px 10px 0px 5px $dark-gray,
+          50px 10px 0px 5px $dark-gray, 70px 10px 0px 5px $dark-gray,
+          90px 10px 0px 5px $dark-gray, 110px 10px 0px 5px $dark-gray,
+          130px 10px 0px 5px $dark-gray, 150px 10px 0px 5px $dark-gray,
+          170px 10px 0px 5px $dark-gray;
+      }
+    }
+  }
+
+  .Pillar {
+    position: absolute;
+    top: 20px;
+    @include size(180px, 20px);
+    background-color: $track-day-color;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      @include size(0px, 0px);
+      box-shadow: 0px 10px 0px 10px $track-day-color,
+        20px 10px 0px 10px $track-day-color, 0px 170px 0px 10px $track-day-color,
+        20px 170px 0px 10px $track-day-color;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      @include size(0px, 0px);
+      box-shadow: 10px 30px 0px 5px $dark-gray, 10px 50px 0px 5px $dark-gray,
+        10px 70px 0px 5px $dark-gray, 10px 90px 0px 5px $dark-gray,
+        10px 110px 0px 5px $dark-gray, 10px 130px 0px 5px $dark-gray,
+        10px 150px 0px 5px $dark-gray;
+    }
+  }
+
+  .Train {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    @include size(50px, 140px);
+    background-color: $train-color;
+
+    animation: moveTrain 3.5s linear infinite;
+
+    // window
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      @include size(0px, 0px);
+      box-shadow: 10px 13px 0px 5px $window-night-color1,
+        30px 13px 0px 5px $window-night-color1,
+        50px 13px 0px 5px $window-night-color1,
+        70px 13px 0px 5px $window-night-color1,
+        90px 13px 0px 5px $window-night-color1,
+        10px 35px 0px 5px $window-night-color1,
+        30px 35px 0px 5px $window-night-color1,
+        50px 35px 0px 5px $window-night-color1,
+        70px 35px 0px 5px $window-night-color1,
+        90px 35px 0px 5px $window-night-color1;
+    }
+
+    // front window
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      @include size(0px, 0px);
+
+      box-shadow: 120px 22px 0px 15px $window-night-color1;
+    }
+  }
+}
