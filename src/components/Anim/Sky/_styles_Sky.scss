@@ -1,5 +1,5 @@
-@import "../../../reset.css";
-@import "../../../variablesMixin.scss";
+@import '../../../reset.css';
+@import '../../../variablesMixin.scss';
 
 @keyframes down {
   0% {
@@ -19,7 +19,7 @@
   animation: down 0.5s ease forwards;
 }
 
-.Sky-Night {
+.Sky.Sky-Night {
   background-image: linear-gradient(
     to top,
     $primary-background-color 0%,
@@ -27,6 +27,6 @@
   );
 }
 
-.Sky-Day {
+.Sky.Sky-Day {
   background-image: linear-gradient(to top, #a4e0fa 0%, #29a8df 100%);
 }
