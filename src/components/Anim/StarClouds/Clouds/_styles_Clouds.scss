@@ -1,0 +1,67 @@
+@import "../../../../variablesMixin.scss";
+
+$starCloudsContainer-initial-position: -150px;
+
+@keyframes moveDown {
+  0% {
+    top: $starCloudsContainer-initial-position;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@mixin cloudPos($t, $l) {
+  position: absolute;
+  top: $t;
+  left: $l;
+}
+
+.CloudContainer {
+  position: absolute;
+  top: $starCloudsContainer-initial-position;
+  left: 0;
+  width: 100%;
+  height: 100px;
+
+  background-color: transparent;
+  animation: moveDown 0.5s ease-in-out 1.5s 1 normal forwards;
+
+  .Cloud {
+    background-color: $white;
+    font-size: 12px;
+    width: 10px;
+    height: 20px;
+  }
+
+  .Pos1 {
+    @include cloudPos(10px, 60px);
+  }
+
+  .Pos2 {
+    @include cloudPos(65px, 140px);
+  }
+
+  .Pos3 {
+    @include cloudPos(100px, 440px);
+  }
+
+  .Pos4 {
+    @include cloudPos(20px, 700px);
+  }
+  .Pos5 {
+    @include cloudPos(55px, 550px);
+  }
+  .Pos6 {
+    @include cloudPos(50px, 300px);
+  }
+  .Pos7 {
+    @include cloudPos(80px, 250px);
+  }
+  .Pos8 {
+    @include cloudPos(80px, 850px);
+  }
+  .Pos9 {
+    @include cloudPos(70px, 1000px);
+  }
+}

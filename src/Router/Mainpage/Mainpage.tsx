@@ -3,8 +3,9 @@ import { fetchWeather } from "../../api/fetchWeather";
 import BuildingRowOne from "../../components/Anim/BuildingRowOne/BuildingRowOne";
 import River from "../../components/Anim/River/River";
 import Sky from "../../components/Anim/Sky/Sky";
+import Clouds from "../../components/Anim/StarClouds/Clouds/Clouds";
+import Stars from "../../components/Anim/StarClouds/Stars/Stars";
 import SunMoon from "../../components/Anim/SunMoon/SunMoon";
-import MainDisplayCard from "../../components/MainDisplayCard/MainDisplayCard";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { currentCoordinateAtom, isCelsiusAtom, isDayAtom, isSearchActiveAtom, weatherDataAtom } from "../../utils/atoms";
 import { position, WeatherInfo } from "../../utils/interfaces";
@@ -126,6 +127,7 @@ function Mainpage() {
       >
         <div className="MainCanvas">
           <Sky />
+          {isDay ? <Clouds /> : <Stars />}
           <header>
             <div
               className={`header-TempIcon${!isCelsius ? " activeTransparent" : " "}`}
@@ -150,6 +152,7 @@ function Mainpage() {
           <River />
           <BuildingRowOne leftOffset={0} opacity={1} />
           <BuildingRowOne leftOffset={1400} opacity={1} />
+
         </div>
       </div>
     </div>

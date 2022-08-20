@@ -1,6 +1,6 @@
 @import "../../../variablesMixin.scss";
 
-@keyframes move_right {
+@keyframes moveLeft {
   0% {
     transform: translateX(300%);
   }
@@ -17,7 +17,7 @@
 
   @include size(100px, 100px);
   margin: 0 auto;
-  animation: move_right 0.5s ease 1s forwards;
+  animation: moveLeft 0.5s ease 1s forwards;
 
   .Circle {
     @include size(100px, 100px);

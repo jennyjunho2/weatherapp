@@ -1,0 +1,44 @@
+@-webkit-keyframes glow {
+  0% {
+    filter: brightness(0.75);
+  }
+  50% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(0.75);
+  }
+}
+@keyframes glow {
+  0% {
+    filter: brightness(0.75);
+  }
+  50% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(0.75);
+  }
+}
+@-webkit-keyframes glow2 {
+  0% {
+    filter: brightness(0.5);
+  }
+  50% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(0.5);
+  }
+}
+@keyframes glow2 {
+  0% {
+    filter: brightness(0.5);
+  }
+  50% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(0.5);
+  }
+}/*# sourceMappingURL=variablesMixin.css.map */
