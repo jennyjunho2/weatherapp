@@ -7,12 +7,6 @@ function Clouds() {
       <div className="Pos1">
         <div className="Cloud"></div>
       </div>
-      <div className="Pos2">
-        <div className="Cloud"></div>
-      </div>
-      <div className="Pos3">
-        <div className="Cloud"></div>
-      </div>
       <div className="Pos4">
         <div className="Cloud"></div>
       </div>
@@ -23,9 +17,6 @@ function Clouds() {
         <div className="Cloud"></div>
       </div>
       <div className="Pos7">
-        <div className="Cloud"></div>
-      </div>
-      <div className="Pos8">
         <div className="Cloud"></div>
       </div>
       <div className="Pos9">

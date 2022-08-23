@@ -82,4 +82,8 @@ export function IDtoAnimatedIcon(id: number) {
   } else {
     return SkyconType.CLEAR_DAY;
   }
+};
+
+export function randRange(minNum: number, maxNum: number) {
+  return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
 }

@@ -1,0 +1,29 @@
+@import "../../../variablesMixin.scss";
+
+@keyframes fall {
+  to {
+    margin-top: 100%;
+  }
+}
+
+.RainSky {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #232323 0%, #111111 100%);
+}
+
+.drop {
+  background: -webkit-gradient(
+    linear,
+    0% 0%,
+    0% 100%,
+    from(rgb(248, 254, 255)),
+    to(rgba(255, 255, 255, 0.5))
+  );
+  width: 1px;
+  height: 50px;
+  position: absolute;
+  animation: fall 0.63s linear infinite;
+}

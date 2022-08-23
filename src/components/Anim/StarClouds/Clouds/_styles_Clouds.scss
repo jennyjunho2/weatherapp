@@ -1,6 +1,6 @@
 @import "../../../../variablesMixin.scss";
 
-$starCloudsContainer-initial-position: -150px;
+$starCloudsContainer-initial-position: -1000px;
 
 @keyframes moveDown {
   0% {
@@ -8,6 +8,12 @@ $starCloudsContainer-initial-position: -150px;
   }
   100% {
     top: 0px;
+  }
+}
+
+@keyframes move {
+  50% {
+    transform: translateY(-10px);
   }
 }
 
@@ -28,38 +34,31 @@ $starCloudsContainer-initial-position: -150px;
   animation: moveDown 0.5s ease-in-out 1.5s 1 normal forwards;
 
   .Cloud {
-    background-color: $white;
+    background-color: #fff;
     font-size: 12px;
-    width: 10px;
-    height: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 65px -15px 0 -5px #fff, 25px -25px #fff, 30px 10px #fff,
+      60px 15px 0 -10px #fff, 85px 5px 0 -5px #fff;
+    animation: move 6s ease infinite;
   }
 
   .Pos1 {
-    @include cloudPos(10px, 60px);
-  }
-
-  .Pos2 {
-    @include cloudPos(65px, 140px);
-  }
-
-  .Pos3 {
-    @include cloudPos(100px, 440px);
+    @include cloudPos(140px, 60px);
   }
 
   .Pos4 {
-    @include cloudPos(20px, 700px);
+    @include cloudPos(200px, 700px);
   }
   .Pos5 {
-    @include cloudPos(55px, 550px);
+    @include cloudPos(150px, 550px);
   }
   .Pos6 {
     @include cloudPos(50px, 300px);
   }
   .Pos7 {
     @include cloudPos(80px, 250px);
-  }
-  .Pos8 {
-    @include cloudPos(80px, 850px);
   }
   .Pos9 {
     @include cloudPos(70px, 1000px);

@@ -1,4 +1,3 @@
-@use "sass:color";
 @import "../../reset.css";
 @import "../../variablesMixin.scss";
 
@@ -72,6 +71,10 @@
 
       .Zindex1000 {
         z-index: 1000;
+      }
+
+      .BuildingsRowOne {
+        animation: buildingRowOne 0.5s ease-in-out 0.5s forwards;
       }
     }
   }

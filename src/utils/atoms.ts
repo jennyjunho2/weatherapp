@@ -19,6 +19,11 @@ export const isDayAtom = atom<boolean>({
   default: true,
 });
 
+export const isRainingAtom = atom<boolean>({
+  key: "isRaining",
+  default: false,
+});
+
 export const isSearchActiveAtom = atom<boolean>({
   key: "searchActive",
   default: false,

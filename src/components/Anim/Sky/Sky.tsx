@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { isDayAtom } from '../../../utils/atoms';
+import { isDayAtom, isRainingAtom } from '../../../utils/atoms';
 import './_styles_Sky.scss';
 
 function Sky() {

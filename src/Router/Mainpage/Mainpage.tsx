@@ -1,13 +1,16 @@
+import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchWeather } from "../../api/fetchWeather";
 import BuildingRowOne from "../../components/Anim/BuildingRowOne/BuildingRowOne";
+import Fog from "../../components/Anim/Fog/Fog";
+import RainSky from "../../components/Anim/RainSky/RainSky";
 import River from "../../components/Anim/River/River";
 import Sky from "../../components/Anim/Sky/Sky";
 import Clouds from "../../components/Anim/StarClouds/Clouds/Clouds";
 import Stars from "../../components/Anim/StarClouds/Stars/Stars";
 import SunMoon from "../../components/Anim/SunMoon/SunMoon";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { currentCoordinateAtom, isCelsiusAtom, isDayAtom, isSearchActiveAtom, weatherDataAtom } from "../../utils/atoms";
+import { currentCoordinateAtom, isCelsiusAtom, isDayAtom, isRainingAtom, isSearchActiveAtom, weatherDataAtom } from "../../utils/atoms";
 import { position, WeatherInfo } from "../../utils/interfaces";
 import { degToDirection } from "../../utils/misc";
 import "./_styles_Mainpage.scss";
@@ -17,6 +20,10 @@ function Mainpage() {
   const [isCelsius, setIsCelsius] = useRecoilState<boolean>(isCelsiusAtom);
   const searchActive = useRecoilValue<boolean>(isSearchActiveAtom);
   const [isDay, setIsDay] = useRecoilState<boolean>(isDayAtom);
+  const [isRaining, setIsRaining] = useRecoilState<boolean>(isRainingAtom);
+  const [rainDrops, setRainDrops] = useState<number>(100);
+  const [isFog, setIsFog] = useState<boolean>(false);
+  const [isWind, setIsWind] = useState<boolean>(false);
 
   // location hook
   const [coordinate, setCoordinate] = useRecoilState<position>(currentCoordinateAtom);
@@ -37,6 +44,16 @@ function Mainpage() {
       console.log("Cannot get geolocation");
     }
   };
+
+  // Check is Day or Night
+  const getIsDay = () => {
+    const hours = new Date().getHours()
+    if (hours > 6 && hours < 20) {
+      setIsDay(true);
+    } else {
+      setIsDay(false);
+    }
+  }
 
   const getWeather = async (location: position) => {
     const weatherResponse: WeatherInfo = {
@@ -117,7 +134,39 @@ function Mainpage() {
       .catch((error) => console.log(error));
   }
 
+  const getIsRaining = () => {
+    const id = weatherData.current.weatherID;
+    if (300 <= id && id <= 531) {
+      setIsRaining(true);
+      setIsDay(false);
+      if (300 <= id && id <= 321) {
+        setRainDrops(100);
+      } else {
+        setRainDrops(400);
+      }
+    } else {
+      setIsRaining(false);
+    }
+  }
+
+  const getAtmosphere = () => {
+    const id = weatherData.current.weatherID;
+    if (700 <= id && id <= 721) {
+      setIsFog(true);
+    } else if (id <= 781) {
+
+    }
+  }
+
   const toggleDayNnite = () => { setIsDay(prev => !prev) }
+  const mkitRain = () => { setIsRaining(prev => !prev) }
+
+  useEffect(() => {
+    getCurrentLocation();
+    getIsDay();
+    getWeather(coordinate);
+    getIsRaining();
+  }, [])
 
   return (
     <div className="TopContainer">
@@ -126,8 +175,9 @@ function Mainpage() {
         className={`MainContainer${searchActive ? " searchActive" : " "}`}
       >
         <div className="MainCanvas">
-          <Sky />
-          {isDay ? <Clouds /> : <Stars />}
+          {isRaining ?
+            <RainSky drops={rainDrops} /> : <Sky />}
+          {isRaining ? null : isDay ? <Clouds /> : <Stars />}
           <header>
             <div
               className={`header-TempIcon${!isCelsius ? " activeTransparent" : " "}`}
@@ -142,17 +192,15 @@ function Mainpage() {
               °C
             </div>
             <button onClick={() => toggleDayNnite()}>Day and Nite</button>
+            <button onClick={() => mkitRain()}>Make it Rain</button>
           </header>
-          {/* <div className="Zindex1000">
-            <MainDisplayCard />
-          </div> */}
           <div className="Zindex1">
-            <SunMoon />
+            {isRaining ? null : <SunMoon />}
           </div>
           <River />
           <BuildingRowOne leftOffset={0} opacity={1} />
           <BuildingRowOne leftOffset={1400} opacity={1} />
-
+          <Fog />
         </div>
       </div>
     </div>
