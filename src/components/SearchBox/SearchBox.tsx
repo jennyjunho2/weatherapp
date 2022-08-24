@@ -8,7 +8,7 @@ import { fetchWeather } from "../../api/fetchWeather";
 import { currentCoordinateAtom, isLoadingAtom, isSearchActiveAtom, weatherDataAtom } from "../../utils/atoms";
 import { position, WeatherInfo } from "../../utils/interfaces";
 import { degToDirection } from "../../utils/misc";
-import "./_styles.scss";
+import "./_styles_SearchBox.scss";
 
 function SearchBox() {
   const [address, setAddress] = useState<string>("");
@@ -146,6 +146,7 @@ function SearchBox() {
                   <div
                     {...getSuggestionItemProps(suggestion)}
                     key={idx}
+                    className="dropDownElement"
                   >
                     <span>{suggestion.description}</span>
                   </div>

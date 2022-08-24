@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { fetchTimezone } from "../../api/fetchTimezone";
 import { fetchWeather } from "../../api/fetchWeather";
 import BuildingRowOne from "../../components/Anim/BuildingRowOne/BuildingRowOne";
 import Fog from "../../components/Anim/Fog/Fog";
@@ -10,8 +11,8 @@ import Clouds from "../../components/Anim/StarClouds/Clouds/Clouds";
 import Stars from "../../components/Anim/StarClouds/Stars/Stars";
 import SunMoon from "../../components/Anim/SunMoon/SunMoon";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { currentCoordinateAtom, isCelsiusAtom, isDayAtom, isRainingAtom, isSearchActiveAtom, weatherDataAtom } from "../../utils/atoms";
-import { position, WeatherInfo } from "../../utils/interfaces";
+import { currentCoordinateAtom, currentTimezoneAtom, isCelsiusAtom, isDayAtom, isRainingAtom, isSearchActiveAtom, weatherDataAtom } from "../../utils/atoms";
+import { position, TimezoneInfo, WeatherInfo } from "../../utils/interfaces";
 import { degToDirection } from "../../utils/misc";
 import "./_styles_Mainpage.scss";
 
@@ -23,10 +24,12 @@ function Mainpage() {
   const [isRaining, setIsRaining] = useRecoilState<boolean>(isRainingAtom);
   const [rainDrops, setRainDrops] = useState<number>(100);
   const [isFog, setIsFog] = useState<boolean>(false);
-  const [isWind, setIsWind] = useState<boolean>(false);
 
   // location hook
   const [coordinate, setCoordinate] = useRecoilState<position>(currentCoordinateAtom);
+
+  // timezone hook
+  const [timezone, setTimezone] = useRecoilState<TimezoneInfo>(currentTimezoneAtom);
 
   // weather data hook
   const [weatherData, setWeatherData] = useRecoilState<WeatherInfo>(weatherDataAtom);
@@ -45,18 +48,8 @@ function Mainpage() {
     }
   };
 
-  // Check is Day or Night
-  const getIsDay = () => {
-    const hours = new Date().getHours()
-    if (hours > 6 && hours < 20) {
-      setIsDay(true);
-    } else {
-      setIsDay(false);
-    }
-  }
-
   const getWeather = async (location: position) => {
-    const weatherResponse: WeatherInfo = {
+    let weatherResponse: WeatherInfo = {
       city: "Seoul",
       windDirection: "N",
       windSpeed: 0,
@@ -132,41 +125,87 @@ function Mainpage() {
         setWeatherData(weatherResponse);
       })
       .catch((error) => console.log(error));
+  };
+
+  const getTimezone = async (location: position) => {
+    let newTimezone: TimezoneInfo = {
+      rawOffset: 9 * 3600,
+      dstOffset: 0,
+      timeZoneId: "Asia/Seoul",
+    }
+    await fetchTimezone(location)
+      .then((data) => {
+        if (data.status === "OK") {
+          newTimezone.dstOffset = data.dstOffset;
+          newTimezone.rawOffset = data.rawOffset;
+          newTimezone.timeZoneId = data.timeZoneId;
+          setTimezone(newTimezone);
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
-  const getIsRaining = () => {
-    const id = weatherData.current.weatherID;
-    if (300 <= id && id <= 531) {
-      setIsRaining(true);
-      setIsDay(false);
-      if (300 <= id && id <= 321) {
-        setRainDrops(100);
+  const updateCanvas = () => {
+    // Check if is Raining
+    const getIsRaining = () => {
+      const id = weatherData.current.weatherID;
+      if (300 <= id && id <= 531) {
+        setIsRaining(true);
+        setIsDay(false);
+        if (300 <= id && id <= 321) {
+          setRainDrops(100);
+        } else {
+          setRainDrops(400);
+        }
       } else {
-        setRainDrops(400);
+        setIsRaining(false);
       }
-    } else {
-      setIsRaining(false);
     }
-  }
 
-  const getAtmosphere = () => {
-    const id = weatherData.current.weatherID;
-    if (700 <= id && id <= 721) {
-      setIsFog(true);
-    } else if (id <= 781) {
-
+    // Check if is foggy
+    const getAtmosphere = () => {
+      const id = weatherData.current.weatherID;
+      if (700 <= id && id <= 721) {
+        setIsFog(true);
+      }
     }
-  }
 
-  const toggleDayNnite = () => { setIsDay(prev => !prev) }
-  const mkitRain = () => { setIsRaining(prev => !prev) }
+    // Check is Day or Night
+    const getIsDay = () => {
+      const hoursStr = (new Date().toLocaleString(
+        'en-US', {
+        timeZone: timezone.timeZoneId,
+        hour12: false,
+        hour: "numeric"
+      }));
+      const hours = +(hoursStr.replace('AM', '').replace('PM', '').replace(' ', ''));
+      console.log(hours);
+      if (hours > 6 && hours < 20) {
+        setIsDay(true);
+      } else {
+        setIsDay(false);
+      }
+    }
+
+    getIsDay();
+    getIsRaining();
+    getAtmosphere();
+  };
 
   useEffect(() => {
     getCurrentLocation();
-    getIsDay();
-    getWeather(coordinate);
-    getIsRaining();
   }, [])
+
+  useEffect(() => {
+    console.log(coordinate);
+    getWeather(coordinate);
+    console.log("getWeather Finished");
+    getTimezone(coordinate);
+    console.log(timezone);
+    console.log("getTimeZone Finished");
+    updateCanvas();
+    console.log("UpdateCanvas Finished");
+  }, [weatherData.city]);
 
   return (
     <div className="TopContainer">
@@ -191,8 +230,6 @@ function Mainpage() {
             >
               °C
             </div>
-            <button onClick={() => toggleDayNnite()}>Day and Nite</button>
-            <button onClick={() => mkitRain()}>Make it Rain</button>
           </header>
           <div className="Zindex1">
             {isRaining ? null : <SunMoon />}
@@ -200,7 +237,7 @@ function Mainpage() {
           <River />
           <BuildingRowOne leftOffset={0} opacity={1} />
           <BuildingRowOne leftOffset={1400} opacity={1} />
-          <Fog />
+          {isFog ? <Fog /> : null}
         </div>
       </div>
     </div>

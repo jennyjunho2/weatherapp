@@ -10,6 +10,7 @@ import { MdMyLocation } from "@react-icons/all-files/md/MdMyLocation";
 import { ReactSkycon, SkyconType } from "react-skycons-extended";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import "./_styles.scss";
+import { memo } from "react";
 
 function Sidebar() {
   // Get today Date and covert to Date String
@@ -182,4 +183,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default memo(Sidebar);

@@ -1,6 +1,108 @@
 @import "../../../variablesMixin.scss";
 
-.Fog {
+@keyframes fogAnimation1 {
+  0% {
+    opacity: 0.1;
+  }
+  22% {
+    opacity: 0.5;
+  }
+  40% {
+    opacity: 0.28;
+  }
+  58% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.16;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes fogAnimation2 {
+  0% {
+    opacity: 0.5;
+  }
+  25% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  80% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fogAnimation3 {
+  0% {
+    opacity: 0.8;
+  }
+  27% {
+    opacity: 0.2;
+  }
+  52% {
+    opacity: 0.6;
+  }
+  68% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes fogMoveLeft {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+@mixin fogSet {
+  width: 200%;
+  height: 100%;
+  position: absolute;
+}
+
+@mixin image {
+  background-size: 100%;
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+
+.fogWrapper {
   position: absolute;
   top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#fog01 {
+  @include fogSet;
+  animation: fogAnimation01 12s linear infinite, fogMoveLeft 16s linear infinite;
+  .image01,
+  .image02 {
+    background: url("../../../assets/fog1.png") repeat-x top left transparent;
+    @include image;
+  }
+}
+
+#fog02 {
+  @include fogSet;
+  animation: fogAnimation01 15s linear infinite, fogMoveLeft 19s linear infinite;
+  .image01,
+  .image02 {
+    background: url("../../../assets/fog2.png") repeat-x top left transparent;
+    @include image;
+  }
 }

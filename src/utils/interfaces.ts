@@ -3,6 +3,12 @@ export interface position {
   longitude: number;
 }
 
+export interface TimezoneInfo {
+  dstOffset: number;
+  rawOffset: number;
+  timeZoneId: string;
+}
+
 export interface searchLocation {
   confidence: number;
   latitude: number;

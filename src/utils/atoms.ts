@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { position, WeatherInfo } from "./interfaces";
+import { position, TimezoneInfo, WeatherInfo } from "./interfaces";
 
 export const isCelsiusAtom = atom<boolean>({
   key: "isCelsius",
@@ -11,6 +11,15 @@ export const currentCoordinateAtom = atom<position>({
   default: {
     longitude: 126.8682,
     latitude: 37.5179,
+  },
+});
+
+export const currentTimezoneAtom = atom<TimezoneInfo>({
+  key: "currentTimezone",
+  default: {
+    rawOffset: 9 * 3600,
+    dstOffset: 0,
+    timeZoneId: "Asia/Seoul",
   },
 });
 
