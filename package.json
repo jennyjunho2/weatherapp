@@ -1,6 +1,7 @@
 {
   "name": "weatherapp",
   "version": "0.1.0",
+  "homepage": "https://whatisyourname0.github.io/weather-app/",
   "private": true,
   "dependencies": {
     "@cicciosgamino/openweather-apis": "^5.2.0",
@@ -26,6 +27,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -51,6 +54,7 @@
   },
   "devDependencies": {
     "@types/react-places-autocomplete": "^7.2.9",
-    "@types/recoil": "^0.0.9"
+    "@types/recoil": "^0.0.9",
+    "gh-pages": "^4.0.0"
   }
 }
