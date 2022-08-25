@@ -9,8 +9,10 @@ import SearchBox from "../SearchBox/SearchBox";
 import { MdMyLocation } from "@react-icons/all-files/md/MdMyLocation";
 import { ReactSkycon, SkyconType } from "react-skycons-extended";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import "./_styles.scss";
+import "./_styles_Sidebar.scss";
 import { memo } from "react";
+import { BsCalendar } from "@react-icons/all-files/bs/BsCalendar";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   // Get today Date and covert to Date String
@@ -174,6 +176,16 @@ function Sidebar() {
             <h3>{isCelsius ? `${weatherData.current.min?.toFixed(2)}°C` : `${celtoFar(weatherData.current.min)?.toFixed(2)}°F`}</h3>
             <h3>{isCelsius ? `${weatherData.current.max?.toFixed(2)}°C` : `${celtoFar(weatherData.current.max)?.toFixed(2)}°F`}</h3>
           </div>
+        </div>
+        <div className="ButtonContainer">
+          <Link to="/summary">
+            <div className="ButtonWrapper">
+              <span>
+                <em>3-Day Summary</em>
+                <i><BsCalendar /></i>
+              </span>
+            </div>
+          </Link>
         </div>
         <div className="Date">
           <h1>{today.toString()}</h1>

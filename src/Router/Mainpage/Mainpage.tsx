@@ -179,7 +179,6 @@ function Mainpage() {
         hour: "numeric"
       }));
       const hours = +(hoursStr.replace('AM', '').replace('PM', '').replace(' ', ''));
-      console.log(hours);
       if (hours > 6 && hours < 20) {
         setIsDay(true);
       } else {
@@ -193,18 +192,9 @@ function Mainpage() {
   };
 
   useEffect(() => {
-    getCurrentLocation();
-  }, [])
-
-  useEffect(() => {
-    console.log(coordinate);
     getWeather(coordinate);
-    console.log("getWeather Finished");
     getTimezone(coordinate);
-    console.log(timezone);
-    console.log("getTimeZone Finished");
     updateCanvas();
-    console.log("UpdateCanvas Finished");
   }, [weatherData.city]);
 
   return (

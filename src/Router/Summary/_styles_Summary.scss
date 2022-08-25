@@ -203,3 +203,15 @@ $radius-size: 24px;
   background-color: black;
   transition: $search-transition-effect;
 }
+
+.BackToMainPage {
+  position: absolute;
+  top: 50%;
+  left: 2%;
+
+  .Icon {
+    font-size: 96px;
+    color: $white;
+    transform: scaleY(1.5);
+  }
+}

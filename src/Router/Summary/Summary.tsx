@@ -1,5 +1,8 @@
+import { IconContext } from "@react-icons/all-files";
 import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
+import { TiChevronLeft } from "@react-icons/all-files/ti/TiChevronLeft";
 import { useEffect } from 'react';
+import { Link } from "react-router-dom";
 import { ReactSkycon, SkyconType } from 'react-skycons-extended';
 import { useRecoilState, useRecoilValue } from "recoil";
 import { fetchWeather } from "../../api/fetchWeather";
@@ -118,7 +121,7 @@ function Summary() {
   useEffect(() => {
     getCurrentLocation();
     getWeather(coordinate);
-  }, []);
+  }, [weatherData.city]);
 
   return (
     <div className="App">
@@ -126,6 +129,13 @@ function Summary() {
       <div
         className={`MainContainer${searchActive ? " searchActive" : " "}`}
       >
+        <div className="BackToMainPage">
+          <Link to="/">
+            <IconContext.Provider value={{ className: "Icon" }}>
+              <TiChevronLeft />
+            </IconContext.Provider>
+          </Link>
+        </div>
         <div className="MainPage">
           <header>
             <div

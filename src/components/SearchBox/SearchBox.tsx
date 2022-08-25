@@ -5,16 +5,15 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { fetchWeather } from "../../api/fetchWeather";
-import { currentCoordinateAtom, isLoadingAtom, isSearchActiveAtom, weatherDataAtom } from "../../utils/atoms";
+import { currentCoordinateAtom, isSearchActiveAtom, weatherDataAtom } from "../../utils/atoms";
 import { position, WeatherInfo } from "../../utils/interfaces";
 import { degToDirection } from "../../utils/misc";
 import "./_styles_SearchBox.scss";
 
 function SearchBox() {
   const [address, setAddress] = useState<string>("");
-  const setLoading = useSetRecoilState<boolean>(isLoadingAtom);
   const setWeatherData = useSetRecoilState<WeatherInfo>(weatherDataAtom);
-  const setSearchActive = useSetRecoilState<boolean>(isSearchActiveAtom);
+  const [searchActive, setSearchActive] = useRecoilState<boolean>(isSearchActiveAtom);
   const [coordinate, setCoordinate] = useRecoilState<position>(currentCoordinateAtom);
 
   const handleSelect = async (query: string) => {
@@ -108,15 +107,13 @@ function SearchBox() {
 
   const handleEnterPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      setLoading(true);
       getWeather(coordinate);
       setSearchActive(false);
-      setLoading(false);
     }
   }
 
   return (
-    <div>
+    <div className="SearchBoxWrapper">
       <PlacesAutocomplete
         value={address}
         onChange={setAddress}
@@ -126,21 +123,31 @@ function SearchBox() {
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <>
             <div className="SearchBox"
-              onFocus={() => setSearchActive(true)}
-              onBlur={() => setSearchActive(false)}
+              onFocus={() => { setSearchActive(true); }}
+              onBlur={() => { setSearchActive(false); console.log("On BLur"); }}
             >
               <input
                 {...getInputProps({
                   placeholder: "Search City...",
                   className: "search",
                   id: "SearchValue",
-                  onKeyDown: handleEnterPress
+                  onKeyDown: handleEnterPress,
                 })}
               />
               <span className="bar"></span>
+              {searchActive &&
+                <div
+                  className="SearchButton"
+                  onClick={() => {
+                    console.log("I'm Clicked"!)
+                    getWeather(coordinate);
+                  }}
+                >
+                  <span>Search</span>
+                </div>
+              }
             </div>
             <div className="dropdownContainer">
-              {loading && <div>Loading...</div>}
               {suggestions.map((suggestion, idx) => {
                 return (
                   <div

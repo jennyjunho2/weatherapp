@@ -2,6 +2,10 @@
 @import "../../reset.css";
 @import "../../variablesMixin.scss";
 
+.SearchBoxWrapper {
+  display: block;
+}
+
 .SearchBox {
   position: relative;
 
@@ -61,7 +65,7 @@
 
 .dropdownContainer {
   position: absolute;
-  top: 65px;
+  top: 70px;
   .dropDownElement {
     padding: 10px;
     background-color: $secondary-background-color;
@@ -78,5 +82,21 @@
       background-color: $secondary-background-color;
       transition: background-color 0.2s ease-in-out;
     }
+  }
+}
+
+.SearchButton {
+  position: absolute;
+  top: 3.5%;
+  left: 120%;
+  padding: 6px;
+
+  border: 2px solid $white;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  span {
+    font-size: 20px;
   }
 }

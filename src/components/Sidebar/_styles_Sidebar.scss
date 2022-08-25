@@ -119,6 +119,70 @@
     align-items: center;
   }
 
+  .ButtonContainer {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .ButtonWrapper {
+      position: relative;
+      width: 200px;
+      height: 55px;
+      margin: 0 auto;
+
+      border: 3px solid $white;
+      border-radius: 50px;
+
+      letter-spacing: 0.5px;
+      appearance: none;
+      overflow: hidden;
+
+      cursor: pointer;
+      font-size: 24px;
+      transition: all 0.3s ease-in-out;
+
+      background-color: $primary-background-color;
+      color: $white;
+
+      span,
+      em,
+      i {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+      }
+
+      em {
+        top: -10%;
+        line-height: 60px;
+      }
+
+      i {
+        top: 140%;
+        list-style: 60px;
+      }
+
+      em,
+      i {
+        transition: top 0.3s ease;
+      }
+
+      &:hover {
+        background-color: #104e72;
+
+        em {
+          top: -140%;
+        }
+        i {
+          top: 28%;
+        }
+      }
+    }
+  }
+
   .Date {
     font-size: 36px;
     font-weight: 600;
