@@ -178,7 +178,7 @@ function Sidebar() {
           </div>
         </div>
         <div className="ButtonContainer">
-          <Link to="/summary">
+          <Link to="/summary/">
             <div className="ButtonWrapper">
               <span>
                 <em>3-Day Summary</em>

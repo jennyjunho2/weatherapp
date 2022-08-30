@@ -135,17 +135,6 @@ function SearchBox() {
                 })}
               />
               <span className="bar"></span>
-              {searchActive &&
-                <div
-                  className="SearchButton"
-                  onClick={() => {
-                    console.log("I'm Clicked"!)
-                    getWeather(coordinate);
-                  }}
-                >
-                  <span>Search</span>
-                </div>
-              }
             </div>
             <div className="dropdownContainer">
               {suggestions.map((suggestion, idx) => {

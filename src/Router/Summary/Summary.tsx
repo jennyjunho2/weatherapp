@@ -119,8 +119,10 @@ function Summary() {
   //////////////////////////////////////////////////////////////////////////////////////////
   // Initial State
   useEffect(() => {
-    getCurrentLocation();
-    getWeather(coordinate);
+    if (weatherData.city === "Seoul") {
+      getCurrentLocation();
+      getWeather(coordinate);
+    }
   }, [weatherData.city]);
 
   return (

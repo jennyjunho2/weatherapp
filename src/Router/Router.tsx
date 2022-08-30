@@ -1,15 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Mainpage from "./Mainpage/Mainpage";
 import Summary from "./Summary/Summary";
 
 function Router() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
-        <Route path="/summary" element={<Summary />} />
+        <Route path="/summary/" element={<Summary />} />
         <Route path="/" element={<Mainpage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

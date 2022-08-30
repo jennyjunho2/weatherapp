@@ -192,9 +192,11 @@ function Mainpage() {
   };
 
   useEffect(() => {
-    getWeather(coordinate);
-    getTimezone(coordinate);
-    updateCanvas();
+    if (weatherData.city === "Seoul") {
+      getWeather(coordinate);
+      getTimezone(coordinate);
+      updateCanvas();
+    }
   }, [weatherData.city]);
 
   return (
